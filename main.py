@@ -72,4 +72,3 @@ while True:
     else:
         logica()
 
-##hola hola 
