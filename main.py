@@ -17,8 +17,6 @@ motor4 = Motor(Port.D,positive_direction=Direction.CLOCKWISE,gears=[40,20])
 Sensor_luz = ColorSensor(Port.S1)
 ultrasonico = InfraredSensor(Port.S2)
 
-contador_giros = 0
-
 #Funcion para mover los motores simultaneamente
 
 def mover_motores_adelante(velocidad):
@@ -37,30 +35,19 @@ def parar_motores():
 
 #Funcion para girar a la izquierda
 def izquierda():
-    global contador_giros
-    if contador_giros < 2:
-        motor1.run(-1500)
-        motor2.run(700)
-        motor3.run(-1500)
-        motor4.run(700)
-        wait(1000)
-        contador_giros += 1
-    else:
-        # En el tercer giro, gira más
-        motor1.run(-1500)
-        motor2.run(700)
-        motor3.run(-1500)
-        motor4.run(700)
-        wait(2000)
-        contador_giros = 0  # Reinicia el contador después del tercer giro
+    motor1.run(-3000)
+    motor2.run(1800)
+    motor3.run(-3000)
+    motor4.run(1800)
+    wait(1000)
 
 
 def primer_izquierda():
-    motor1.run(1500)
-    motor2.run(-700)
-    motor3.run(1200)
-    motor4.run(-700)
-    wait(1700)
+    motor1.run(-4000)
+    motor2.run(2800)
+    motor3.run(-4000)
+    motor4.run(2800)
+    wait(1600)
 
 #Estructura logica 
 
@@ -84,3 +71,5 @@ while True:
             mover_motores_adelante(10000)
     else:
         logica()
+
+##hola
