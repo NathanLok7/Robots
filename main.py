@@ -58,32 +58,30 @@ def primer_izquierda():
 ejecuta el ciclo infinito con el programa para la deteccion del oponente'''
 primer_izquierda()
 while True:
-    color = Sensor_luz.color()
-    print("Color: {}, Busqueda: {}, Blancos: {}".format(color,busqueda,blancos))
 
     if ultrasonico.distance() != 100: 
         busqueda = True
         blancos = 0 
-        while Sensor_luz.color() == Color.BLACK or Sensor_luz.color() == Color.BLUE:
+        while Sensor_luz.reflection() <= 50:
             mover_motores_adelante()
-    elif (Sensor_luz.color() == Color.BLACK or Sensor_luz.color() == Color.BLUE) and ultrasonico.distance() == 100 and busqueda:
-        while Sensor_luz.color() == Color.BLACK or Sensor_luz.color() == Color.BLUE:
+    elif Sensor_luz.reflection() <= 50 and ultrasonico.distance() == 100 and busqueda:
+        while Sensor_luz.reflection() <= 50:
             mover_motores_adelante()
         busqueda = False
-    elif ultrasonico.distance() == 100 and (Sensor_luz.color() != Color.BLACK and Sensor_luz.color() != Color.BLUE) and blancos == 0:
+    elif ultrasonico.distance() == 100 and Sensor_luz.reflection() >= 50 and blancos == 0:
         parar_motores()
-        while Sensor_luz.color() != Color.BLACK:
+        while Sensor_luz.reflection() >= 50:
             izquierda()
-        while Sensor_luz.color() == Color.BLACK and ultrasonico.distance() != 100:
+        while Sensor_luz.reflection() <= 50 and ultrasonico.distance() != 100:
             izquierda()
         blancos = 1
-    elif ultrasonico.distance() == 100 and (Sensor_luz.color() != Color.BLACK and Sensor_luz.color() != Color.BLUE) and blancos == 1:
+    elif ultrasonico.distance() == 100 and Sensor_luz.reflection() >= 50 and blancos == 1:
         parar_motores()
-        while Sensor_luz.color() != Color.BLACK:
+        while Sensor_luz.reflection() >= 50:
             derecha()
-        while Sensor_luz.color() == Color.BLACK and ultrasonico.distance() != 100:
+        while Sensor_luz.reflection() <= 50 and ultrasonico.distance() != 100:
             derecha()
-        blancos = 0 
+        blancos = 0
 
 
 
